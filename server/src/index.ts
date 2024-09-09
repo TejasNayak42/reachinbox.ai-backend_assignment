@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { googleRouter } from "./Auth/googleAuth";
+import { outlookRouter } from "./Auth/outlookAuth";
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use("/", googleRouter);
+app.use("/", outlookRouter);
+
 app.get("/", (req, res) => {
   res.send(
     "Welcome to the Google OAuth2 Demo. Go to /auth/google to initiate the sign-in process."
