@@ -22,7 +22,7 @@ app.use("/", outlookRouter);
 app.get("/", (req, res) => {
   res.send(`
         Welcome to the Demo!<br>
-        Please Check <a href="https://tejasnayak.tech" target="_blank">my portfolio for further information ;)</a>.
+        Please Check my  <a href="https://tejasnayak.tech" target="_blank">portfolio </a>for further information ;).
       `);
 });
 
