@@ -20,10 +20,12 @@ app.use("/", googleRouter);
 app.use("/", outlookRouter);
 
 app.get("/", (req, res) => {
-  res.send(
-    "Welcome to the Google OAuth2 Demo. Go to /auth/google to initiate the sign-in process."
-  );
+  res.send(`
+        Welcome to the Demo!<br>
+        Please Check <a href="https://tejasnayak.tech" target="_blank">my portfolio for further information ;)</a>.
+      `);
 });
+
 const port = process.env.PORT;
 app.listen(Number(process.env.PORT), () => {
   console.log(`Server running on port ${port}, http://localhost:${port}`);
