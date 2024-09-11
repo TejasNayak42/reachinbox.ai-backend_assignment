@@ -90,10 +90,8 @@ router.get("/auth/azure/callback", (req: Request, res: Response) => {
         familyId: response.familyId,
       };
 
-      // Log masked response for debugging
       console.log("Token acquired:", maskedResponse);
 
-      // Send the masked token response to the client
       res.send(
         `<pre>Login successful! Token: ${JSON.stringify(
           maskedResponse,
