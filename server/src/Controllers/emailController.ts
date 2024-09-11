@@ -10,11 +10,18 @@ async function applyLabelToEmail(
   const gmail = google.gmail({ version: "v1", auth: oauth2Client });
 
   try {
+    console.log(
+      `Attempting to apply label "${labelName}" to email: ${emailId}`
+    );
+
     const labelsResponse = await gmail.users.labels.list({ userId: "me" });
     const labels = labelsResponse.data.labels || [];
+    console.log("Fetched Labels:", labels);
+
     let labelId = labels.find((label) => label.name === labelName)?.id;
 
     if (!labelId) {
+      console.log(`Label "${labelName}" does not exist. Creating it.`);
       const createLabelResponse = await gmail.users.labels.create({
         userId: "me",
         requestBody: {
@@ -24,16 +31,19 @@ async function applyLabelToEmail(
         },
       });
       labelId = createLabelResponse.data.id;
+      console.log(`Label "${labelName}" created with ID: ${labelId}`);
+    } else {
+      console.log(`Label "${labelName}" already exists with ID: ${labelId}`);
     }
 
-    await gmail.users.messages.modify({
+    const modifyResponse = await gmail.users.messages.modify({
       userId: "me",
       id: emailId,
       requestBody: {
         addLabelIds: [labelId],
       },
     });
-
+    console.log("Modify Response:", modifyResponse);
     console.log(`Label "${labelName}" applied to email with ID: ${emailId}`);
   } catch (error) {
     console.error(`Error applying label "${labelName}" to email:`, error);
@@ -109,4 +119,4 @@ async function categorizeAndReply(
     );
   }
 }
-export { sendEmailReply, categorizeAndReply };
+export { sendEmailReply, categorizeAndReply, applyLabelToEmail };

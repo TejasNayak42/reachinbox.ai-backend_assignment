@@ -2,7 +2,10 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { google } from "googleapis";
 import { categorizeEmail } from "../Controllers/openaiController";
-import { categorizeAndReply } from "../Controllers/emailController";
+import {
+  applyLabelToEmail,
+  categorizeAndReply,
+} from "../Controllers/emailController";
 
 dotenv.config();
 
@@ -68,7 +71,6 @@ router.get("/auth/google/callback", async (req: Request, res: Response) => {
         const recipientEmail =
           emailData.data.payload?.headers?.find((h) => h.name === "From")
             ?.value || "";
-
         const threadId = emailData.data.threadId || "";
 
         await categorizeAndReply(
@@ -80,6 +82,20 @@ router.get("/auth/google/callback", async (req: Request, res: Response) => {
         );
 
         const category = await categorizeEmail(subject, body);
+
+        // Apply the label based on the category
+        let labelName;
+        if (category === "Interested") {
+          labelName = "Interested";
+        } else if (category === "Not Interested") {
+          labelName = "Not Interested";
+        } else if (category === "More Information") {
+          labelName = "More Information";
+        } else {
+          labelName = "Uncategorized";
+        }
+
+        await applyLabelToEmail(email.id, labelName, oauth2Client);
 
         return {
           id: email.id,
