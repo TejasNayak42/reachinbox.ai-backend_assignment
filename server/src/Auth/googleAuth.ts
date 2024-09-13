@@ -83,7 +83,6 @@ router.get("/auth/google/callback", async (req: Request, res: Response) => {
 
         const category = await categorizeEmail(subject, body);
 
-        // Apply the label based on the category
         let labelName;
         if (category === "Interested") {
           labelName = "Interested";

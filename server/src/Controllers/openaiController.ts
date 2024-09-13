@@ -28,9 +28,10 @@ async function categorizeEmail(subject: string, body: string): Promise<string> {
     });
 
     if (response.choices && response.choices.length > 0) {
+      // Trim and remove any unnecessary prefixes like "Category:"
       const completion =
         response.choices[0]?.message?.content?.trim() || "No response";
-      return completion;
+      return completion.replace("Category: ", ""); // Remove the "Category: " part
     } else {
       return "No response";
     }
@@ -39,6 +40,7 @@ async function categorizeEmail(subject: string, body: string): Promise<string> {
     return "Error";
   }
 }
+
 async function generateReply(
   category: string,
   subject: string,
