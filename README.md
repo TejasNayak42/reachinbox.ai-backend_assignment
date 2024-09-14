@@ -1,9 +1,6 @@
 # ReachInBox Assignment
 
-<hr>
 Welcome to my ReachInBox Assigment, this project is an automated email response tool that categorizes emails and sends appropriate replies using AI. It integrates OAuth2 for Gmail and Outlook, uses OpenAI for email categorization and reply generation, and employs BullMQ with Redis for task scheduling. The tool is built in TypeScript.
-
-<hr>
 
 ## Features
 
@@ -16,16 +13,12 @@ Welcome to my ReachInBox Assigment, this project is an automated email response 
 - **Automated Replies**: Sends contextual replies to emails based on the category assigned.
 - **Task Scheduling**: Uses BullMQ and Redis to schedule and process tasks like sending email replies.
 
-<hr>
-
 ## Demo Flow
 
 1. **Authenticate Gmail and Outlook**: Users can connect their email accounts using OAuth2.
 2. **Email Reception**: The tool listens for incoming emails.
 3. **Categorization**: The tool reads email content and assigns a label based on context using OpenAI.
 4. **Automatic Reply**: Depending on the category, the tool sends an automated email response.
-
-<hr>
 
 ## Project Structure
 
