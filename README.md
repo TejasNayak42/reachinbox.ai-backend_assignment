@@ -29,21 +29,21 @@ Welcome to my ReachInBox Assigment, this project is an automated email response 
 
 ## Project Structure
 
-.
-├── src
-│ ├── Auth
-│ │ ├── googleAuth.ts # Google OAuth2 integration
-│ │ └── outlookAuth.ts # Outlook OAuth2 integration
-│ ├── Controllers
-│ │ ├── bullmqController.ts # BullMQ and Redis queue management
-│ │ ├── emailController.ts # Functions for categorizing and replying to emails
-│ │ └── openaiController.ts # OpenAI API integration for categorization and replies
-│ ├── Middlewares
-│ │ ├── openaiClient.ts # OpenAI API client setup
-│ │ └── redisClient.ts # Redis client setup
-│ └── index.ts # Main Express server
-├── .env # Environment variables
-└── README.md
+        .
+        ├── src
+        │ ├── Auth
+        │ │ └── outlookAuth.ts          # Outlook OAuth2 integration
+        │ ├── Controllers
+        │ │ ├── googleAuth.ts           # Google OAuth2 integration
+        │ │ ├── bullmqController.ts     # BullMQ and Redis queue management
+        │ │ ├── emailController.ts      # Functions for categorizing and replying to emails
+        │ │ └── openaiController.ts     # OpenAI API integration for categorization and replies
+        │ ├── Middlewares
+        │ │ ├── openaiClient.ts         # OpenAI API client setup
+        │ │ └── redisClient.ts          # Redis client setup
+        │ └── index.ts                  # Main Express server
+        ├── .env                        # Environment variables
+        └── README.md
 
 ## Prerequisites
 
@@ -97,8 +97,6 @@ REDIS_PASSWORD=your_redis_password
 
             npm run start
 
-    <hr>
-
 ## Usage
 
 1. **Authenticate Gmail:**
@@ -112,8 +110,6 @@ REDIS_PASSWORD=your_redis_password
 3. **Check and respond to emails:**
 
    The tool will automatically fetch new emails, categorize them using OpenAI, and send appropriate replies based on the email context.
-
-<hr>
 
 | Variable               | Description                                |
 | ---------------------- | ------------------------------------------ |
@@ -130,13 +126,9 @@ REDIS_PASSWORD=your_redis_password
 | `REDIS_PORT`           | Port for the Redis server                  |
 | `REDIS_PASSWORD`       | Password for Redis server                  |
 
-<hr>
-
 ## BullMQ & Redis
 
 The tool leverages **BullMQ** for task scheduling. **Redis** is used to manage the queues for sending email replies.
-
-<hr>
 
 ## API Endpoints
 
@@ -149,7 +141,6 @@ The tool leverages **BullMQ** for task scheduling. **Redis** is used to manage t
 
 - **GET /auth/azure**: Initiates the Microsoft Azure OAuth2 flow.
 - **GET /auth/azure/callback**: Handles the Azure OAuth2 callback.
-<hr>
 
 ## How It Works
 
@@ -164,8 +155,6 @@ The tool fetches recent emails and sends the email content to OpenAI to categori
 ### Automated Replies
 
 The tool generates contextual replies based on the categorization and schedules them using BullMQ to be sent out automatically.
-
-<hr>
 
 ## Troubleshooting
 
